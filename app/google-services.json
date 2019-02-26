@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "655435144960",
+    "firebase_url": "https://fooddelivery-65de3.firebaseio.com",
+    "project_id": "fooddelivery-65de3",
+    "storage_bucket": "fooddelivery-65de3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:655435144960:android:dfe49d0aee0e0cef",
+        "android_client_info": {
+          "package_name": "app.food.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "655435144960-fqlu3s76q1jqr6or1k059lvlaoiv6k24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8MlcvYRGhOll0Z6WrAVzCEVX04sqEJNY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
