@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.ForgotPasswordActivity"></activity>
-        <activity android:name=".activity.RegistrationActivity">
+        <activity android:name=".activity.ForgotPasswordActivity"/>
+
 
         <activity android:name="app.food.delivery.activity.LoginActivity">
 
