@@ -20,7 +20,6 @@ public class Constant {
 
     public static final String BASE_URL = "http://192.168.1.200/food_deliveryapp/";
 
-
     public static String mImagesPath;
     public static ProgressDialog progressBar;
     public static Button btnNext;

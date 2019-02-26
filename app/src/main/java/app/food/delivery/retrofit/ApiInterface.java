@@ -15,7 +15,7 @@ public interface ApiInterface {
     @FormUrlEncoded
 
     @POST("signin")
-    Call<SigninModel> getdata(@Field("username") String username,
+    Call<SigninModel> getLoginData (@Field("username") String username,
                               @Field("password") String password,
                               @Field("device_id") String device_id,
                               @Field("firebase_id") String firebase_id);
