@@ -11,7 +11,7 @@ public class RegisterModel {
 
     private String status;
     private String message;
-    private int id;
+    private String id;
 
     public String getStatus() {
         return status;
@@ -29,11 +29,11 @@ public class RegisterModel {
         this.message = message;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
