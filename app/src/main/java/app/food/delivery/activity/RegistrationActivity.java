@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -16,6 +17,8 @@ import app.food.delivery.R;
 import app.food.delivery.model.RegisterModel;
 import app.food.delivery.retrofit.ApiClient;
 import app.food.delivery.retrofit.ApiInterface;
+import app.food.delivery.sessionmanager.SessionManager;
+import app.food.delivery.util.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,6 +29,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btn_Register;
     LoginButton Signup_facebook;
     SignInButton SignInButton;
+    SessionManager sessionManager;
     String mDeviceId, mFirebaseId, mUserName, mEmail, mMobile, mPassword;
     ApiInterface apiInterface;
 
@@ -50,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private void initialization() {
         mDeviceId = Settings.Secure.getString(RegistrationActivity.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+        sessionManager = new SessionManager(getApplicationContext());
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
         mFirebaseId = FirebaseInstanceId.getInstance().getToken();
         reg_Username = findViewById(R.id.input_username);
@@ -57,9 +62,6 @@ public class RegistrationActivity extends AppCompatActivity {
         reg_Mobile = findViewById(R.id.input_mobile);
         reg_Password = findViewById(R.id.input_password);
         btn_Register = findViewById(R.id.btn_register);
-        //Signup_facebook = findViewById(R.id.signup_facebook);
-        SignInButton = findViewById(R.id.signup_google);
-        SignInButton.setSize(com.google.android.gms.common.SignInButton.SIZE_STANDARD);
 
     }
 
@@ -91,6 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void Registration() {
+        Constant.progressDialog(getApplicationContext());
         Call<RegisterModel> registerModelCall = apiInterface.getRegister(mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId);
 
         registerModelCall.enqueue(new Callback<RegisterModel>() {
@@ -98,18 +101,24 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
 
                 if (response.body().getStatus().equals("0")) {
+
+                    sessionManager.createLoginSession(response.body().getId(), mUserName,mEmail,mMobile,mPassword,mFirebaseId,mDeviceId);
                     Toast.makeText(RegistrationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                 } else {
                     Toast.makeText(RegistrationActivity.this, "Signup failed", Toast.LENGTH_SHORT).show();
                 }
+                Constant.progressBar.dismiss();
             }
+
 
             @Override
             public void onFailure(Call<RegisterModel> call, Throwable t) {
-
+                Constant.progressBar.dismiss();
                 Log.e("RegisterActivity", "Failed");
             }
         });
+
     }
 
 }
