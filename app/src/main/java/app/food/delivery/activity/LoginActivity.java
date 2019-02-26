@@ -1,31 +1,26 @@
 package app.food.delivery.activity;
 
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import app.food.delivery.R;
 import app.food.delivery.model.SigninModel;
 import app.food.delivery.retrofit.ApiClient;
 import app.food.delivery.retrofit.ApiInterface;
+import app.food.delivery.util.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import android.view.View;
-
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.Login;
-
-import app.food.delivery.R;
-import app.food.delivery.util.Constant;
 
 public class LoginActivity extends AppCompatActivity {
 
