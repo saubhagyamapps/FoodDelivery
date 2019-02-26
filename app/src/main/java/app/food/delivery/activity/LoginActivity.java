@@ -3,7 +3,6 @@ package app.food.delivery.activity;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +14,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import app.food.delivery.R;
 import app.food.delivery.model.SigninModel;
-import app.food.delivery.retrofit.ApiClient;
-import app.food.delivery.retrofit.ApiInterface;
 import app.food.delivery.util.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mDeviceId = Settings.System.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-
+        firebase_id = FirebaseInstanceId.getInstance().getToken();
 
         etUserName = findViewById(R.id.etUserName);
         etPassword = findViewById(R.id.etPassword);
@@ -57,42 +54,43 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validation();
+
                 mUserName = etUserName.getText().toString().trim();
                 mPassword = etPassword.getText().toString().trim();
-
+                validation();
 
             }
         });
     }
 
     private void validation() {
-        if(mUserName.equals("")){
+        if (mUserName.equals("")) {
             etUserName.setError("Required");
-        }else if(mPassword.equals("")){
+        } else if (mPassword.equals("")) {
             etPassword.setError("Required");
-        }else {
+        } else {
             getLoginCall();
         }
     }
 
     private void getLoginCall() {
-        Call<SigninModel> modelCall = Constant.apiService.getLoginData(mUserName, mPassword, mDeviceId, FirebaseInstanceId.getInstance().getToken());
+        Constant.progressDialog(LoginActivity.this);
+        Call<SigninModel> modelCall = Constant.apiService.getLoginData(mUserName, mPassword, firebase_id, mDeviceId);
         modelCall.enqueue(new Callback<SigninModel>() {
             @Override
             public void onResponse(Call<SigninModel> call, Response<SigninModel> response) {
-                String result = response.body().getStatus();
-                Log.e("LoginActivity", result);
-
-                if (response.body().getStatus().equals(0)) {
+                Constant.progressBar.dismiss();
+                if (response.body().getStatus().equals("0")) {
                     Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void onFailure(Call<SigninModel> call, Throwable t) {
+                Constant.progressBar.dismiss();
 
             }
         });

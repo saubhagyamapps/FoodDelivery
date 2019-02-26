@@ -12,13 +12,13 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
-    @FormUrlEncoded
 
+    @FormUrlEncoded
     @POST("signin")
-    Call<SigninModel> getLoginData (@Field("username") String username,
+    Call<SigninModel> getLoginData(@Field("email") String email,
                               @Field("password") String password,
-                              @Field("device_id") String device_id,
-                              @Field("firebase_id") String firebase_id);
+                              @Field("firebase_id") String firebase_id,
+                              @Field("device_id") String device_id);
 
   @FormUrlEncoded
   @POST("signup")

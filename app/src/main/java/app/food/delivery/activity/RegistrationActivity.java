@@ -57,9 +57,6 @@ public class RegistrationActivity extends AppCompatActivity {
         reg_Mobile = findViewById(R.id.input_mobile);
         reg_Password = findViewById(R.id.input_password);
         btn_Register = findViewById(R.id.btn_register);
-        //Signup_facebook = findViewById(R.id.signup_facebook);
-        SignInButton = findViewById(R.id.signup_google);
-        SignInButton.setSize(com.google.android.gms.common.SignInButton.SIZE_STANDARD);
 
     }
 

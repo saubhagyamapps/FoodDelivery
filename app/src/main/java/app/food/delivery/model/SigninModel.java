@@ -4,10 +4,11 @@ import java.util.List;
 
 public class SigninModel {
 
+
     /**
      * status : 0
      * messgae : login success
-     * result : [{"username":"dummy45","email":"dummy45@gmail.com","mobile":"00000000","firebase_id":"5","device_id":"7"}]
+     * result : [{"username":"keshu","email":"keshuvodedara@gmail.com","mobile":"9624649521","firebase_id":"edpsPAjM0Ws:APA91bEMtUpN8zRTZXZpdNVMbIYilJhyb0ygzIVnUYC3EdaRvhEjBUqZFz6KZG_admX0XtnhIib5fALn4JjFns-GYa94NCW2Mgctf4yv1e14pUi2v3WJacCxnM5TtO2Y7SwjMg0GRkSC","device_id":"0f5ef9fc2b1342dd"}]
      */
 
     private String status;
@@ -40,11 +41,11 @@ public class SigninModel {
 
     public static class ResultBean {
         /**
-         * username : dummy45
-         * email : dummy45@gmail.com
-         * mobile : 00000000
-         * firebase_id : 5
-         * device_id : 7
+         * username : keshu
+         * email : keshuvodedara@gmail.com
+         * mobile : 9624649521
+         * firebase_id : edpsPAjM0Ws:APA91bEMtUpN8zRTZXZpdNVMbIYilJhyb0ygzIVnUYC3EdaRvhEjBUqZFz6KZG_admX0XtnhIib5fALn4JjFns-GYa94NCW2Mgctf4yv1e14pUi2v3WJacCxnM5TtO2Y7SwjMg0GRkSC
+         * device_id : 0f5ef9fc2b1342dd
          */
 
         private String username;
