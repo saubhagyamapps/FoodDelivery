@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
         android:orientation="vertical">
 
@@ -31,6 +30,7 @@
                 android:hint="User Name"
                 android:paddingLeft="10dp"
                 android:paddingBottom="5dp"
+                android:singleLine="true"
                 android:textColor="@color/white"
                 android:textColorHighlight="@color/white"
                 android:textColorHint="@color/white" />
@@ -50,8 +50,10 @@
                 android:layout_height="40dp"
                 android:background="@drawable/edittext_underline"
                 android:hint="Email"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
                 android:paddingBottom="5dp"
+                android:singleLine="true"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
 
@@ -70,8 +72,10 @@
                 android:layout_height="40dp"
                 android:background="@drawable/edittext_underline"
                 android:hint="Mobile No."
+                android:inputType="number"
                 android:paddingLeft="10dp"
                 android:paddingBottom="5dp"
+                android:singleLine="true"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
 
@@ -90,66 +94,22 @@
                 android:layout_height="40dp"
                 android:background="@drawable/edittext_underline"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingBottom="5dp"
+                android:singleLine="true"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_register"
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/register_button"
-            android:gravity="center"
-            android:text="Register"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:text="OR"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <!-- <com.facebook.login.widget.LoginButton
-             android:id="@+id/signup_facebook"
-             android:layout_width="match_parent"
-             android:layout_height="50dp"
-             android:layout_marginTop="20dp"
-             android:layout_marginRight="30dp"
-             android:layout_marginLeft="30dp"
-             android:paddingLeft="30dp"
-             />-->
-        <!--<com.facebook.login.widget.LoginButton
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />-->
-        <!--<Button
-        android:id="@+id/signup_facebook"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/facebook_button"
-        android:drawableLeft="@drawable/facebooklogo"
-        android:paddingLeft="20sp"
-        android:text="Sign Up WIth FaceBook"
-        android:textColor="@color/white"
-        android:textSize="18sp" />-->
-
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/signup_google"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            android:background="@drawable/facebook_button" />
+            android:background="@drawable/boader_button"
+            android:text="@string/registration"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </ScrollView>

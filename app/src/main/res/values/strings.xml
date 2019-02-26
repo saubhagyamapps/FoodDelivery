@@ -4,4 +4,9 @@
     <string name="hint_password">Paasword</string>
     <string name="login">LogIn</string>
     <string name="forgot"><u>Forgot Password?</u></string>
+    <string name="progress_dialog_tital">Loading</string>
+    <string name="progress_dialog_msg">Please Wait.....</string>
+    <string name="facebook_app_id">600108270439990</string>
+    <string name="fb_login_protocol_scheme">fb600108270439990</string>
+    <string name="registration">Registration</string>
 </resources>

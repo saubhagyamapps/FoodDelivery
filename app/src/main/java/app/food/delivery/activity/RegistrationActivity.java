@@ -17,16 +17,6 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
-        init();
     }
 
-
-    private void init()
-    {
-        //Signup_facebook = findViewById(R.id.signup_facebook);
-        SignInButton = findViewById(R.id.signup_google);
-        SignInButton.setSize(com.google.android.gms.common.SignInButton.SIZE_STANDARD);
-
-    }
 }
