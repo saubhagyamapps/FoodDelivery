@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.facebook.FacebookButtonBase;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.SignInButton;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -28,21 +26,18 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btn_Register;
     LoginButton Signup_facebook;
     SignInButton SignInButton;
-    String mDeviceId,mFirebaseId, mUserName, mEmail, mMobile, mPassword;
+    String mDeviceId, mFirebaseId, mUserName, mEmail, mMobile, mPassword;
     ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
-
-        init();
+        initialization();
         Clicked();
     }
 
-    private void Clicked()
-    {
+    private void Clicked() {
         btn_Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +47,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void init() {
+    private void initialization() {
         mDeviceId = Settings.Secure.getString(RegistrationActivity.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -77,39 +72,34 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    private void Validation()
-    {
+    private void Validation() {
         if (mUserName.equalsIgnoreCase("")) {
             reg_Username.setError("Required");
             reg_Username.setFocusable(true);
-        }else if (mEmail.equalsIgnoreCase("")) {
+        } else if (mEmail.equalsIgnoreCase("")) {
             reg_Email.setError("Required");
             reg_Email.setFocusable(true);
         } else if (mMobile.equalsIgnoreCase("")) {
             reg_Mobile.setError("Required");
             reg_Mobile.setFocusable(true);
-        }else if (mPassword.equalsIgnoreCase("")) {
+        } else if (mPassword.equalsIgnoreCase("")) {
             reg_Password.setError("Required");
             reg_Password.setFocusable(true);
-        }else {
+        } else {
             Registration();
         }
     }
 
-    private void Registration()
-    {
-        Call<RegisterModel> registerModelCall = apiInterface.getRegister(mUserName,mEmail,mMobile,mPassword, mFirebaseId,mDeviceId);
+    private void Registration() {
+        Call<RegisterModel> registerModelCall = apiInterface.getRegister(mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId);
 
         registerModelCall.enqueue(new Callback<RegisterModel>() {
             @Override
             public void onResponse(Call<RegisterModel> call, Response<RegisterModel> response) {
 
-                if (response.body().getStatus().equals("0"))
-                {
-                    Toast.makeText(RegistrationActivity.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                if (response.body().getStatus().equals("0")) {
+                    Toast.makeText(RegistrationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(RegistrationActivity.this, "Signup failed", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -122,6 +112,6 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    }
-
 }
+
+
