@@ -53,6 +53,15 @@ public class SigninModel {
         private String mobile;
         private String firebase_id;
         private String device_id;
+        private String id;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         public String getUsername() {
             return username;
