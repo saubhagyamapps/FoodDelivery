@@ -16,11 +16,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        init();
+        initialization();
     }
 
 
-    private void init()
+    private void initialization()
     {
         forgot_Email = findViewById(R.id.forgotpwd_email);
         btn_sendLink = findViewById(R.id.send_email);
