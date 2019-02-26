@@ -7,7 +7,6 @@
     android:scrollbarSize="10dp"
     tools:context=".activity.LoginActivity">
 
-
     <LinearLayout
         android:id="@+id/loginForm"
         android:layout_width="match_parent"
@@ -49,6 +48,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:id="@+id/btnlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
