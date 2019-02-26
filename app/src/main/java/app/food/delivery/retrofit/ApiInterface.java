@@ -1,6 +1,7 @@
 package app.food.delivery.retrofit;
 
 
+import app.food.delivery.model.ForgotPasswordModel;
 import app.food.delivery.model.RegisterModel;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -21,4 +22,9 @@ public interface ApiInterface {
                                   @Field("password") String password,
                                   @Field("firebase_id") String firebase_id,
                                   @Field("device_id") String device_id);
+
+
+  @FormUrlEncoded
+  @POST("forgot_password")
+  Call<ForgotPasswordModel> getPassword(@Field("email") String email);
 }

@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_login);
-        checkLoginSession();
+        //checkLoginSession();
         initialization();
         signUp();
     }
@@ -79,14 +79,14 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
     }
 
-    private void checkLoginSession() {
+   /* private void checkLoginSession() {
         if (sessionManager.checkLogin()) {
             Flag = 1;
         } else {
             Flag = 0;
 
         }
-    }
+    }*/
 
 
 
@@ -103,6 +103,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 signOut();
+            }
+        });
+
+        txt_ForgotPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
     }
