@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_login);
-        //   checkLoginSession();
+
         initialization();
         signUp();
     }
@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
     private void btnsubmit() {
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             getLoginCall();
         }
+
     }
     private void getLoginCall() {
         Constant.progressDialog(LoginActivity.this);
@@ -126,6 +128,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
+    }
+
 
             }
 
@@ -150,6 +154,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 signOut();
+            }
+        });
+
+        txt_ForgotPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
     }

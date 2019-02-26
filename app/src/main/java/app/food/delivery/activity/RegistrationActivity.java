@@ -27,11 +27,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     EditText reg_Username, reg_Email, reg_Mobile, reg_Password;
     Button btn_Register;
-    LoginButton Signup_facebook;
-    SignInButton SignInButton;
     SessionManager sessionManager;
     String mDeviceId, mFirebaseId, mUserName, mEmail, mMobile, mPassword;
-    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +52,6 @@ public class RegistrationActivity extends AppCompatActivity {
         mDeviceId = Settings.Secure.getString(RegistrationActivity.this.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         sessionManager = new SessionManager(getApplicationContext());
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
         mFirebaseId = FirebaseInstanceId.getInstance().getToken();
         reg_Username = findViewById(R.id.input_username);
         reg_Email = findViewById(R.id.input_email);
@@ -93,8 +89,8 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void Registration() {
-        Constant.progressDialog(getApplicationContext());
-        Call<RegisterModel> registerModelCall = apiInterface.getRegister(mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId);
+        Constant.progressDialog(RegistrationActivity.this);
+        Call<RegisterModel> registerModelCall = Constant.apiService.getRegister(mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId);
 
         registerModelCall.enqueue(new Callback<RegisterModel>() {
             @Override
@@ -106,7 +102,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                 } else {
-                    Toast.makeText(RegistrationActivity.this, "Signup failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 Constant.progressBar.dismiss();
             }
