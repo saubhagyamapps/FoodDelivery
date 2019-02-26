@@ -21,7 +21,6 @@ public class Constant {
     public static final String BASE_URL = "http://192.168.1.200/food_deliveryapp/";
 
 
-    public static final String BASE_URL = "http://api.themoviedb.org/3/";
     public static String mImagesPath;
     public static ProgressDialog progressBar;
     public static Button btnNext;
