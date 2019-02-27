@@ -36,18 +36,18 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
-    private static final int RC_SIGN_IN = 007;
     EditText etUserName, etPassword;
     Button btn_Login;
     TextView txt_ForgotPwd;
+    private static final String TAG = "LoginActivity";
     SignInButton SignIn_Google;
+    private GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 007;
     String personName, email;
     SessionManager sessionManager;
     int Flag;
     LoginButton facebook_Login;
     String mEmail, mPassword, mDeviceId, firebase_id;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,15 +120,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SigninModel> call, Response<SigninModel> response) {
 
-
                 Constant.progressBar.dismiss();
                 if (response.body().getStatus().equals("0")) {
                     SigninModel.ResultBean mResponse = response.body().getResult().get(0);
-
-                SigninModel.ResultBean mResponse = response.body().getResult().get(0);
-                Constant.progressBar.dismiss();
-                if (response.body().getStatus().equals("0")) {
-
                     sessionManager.createLoginSession(mResponse.getId(), mEmail, mResponse.getUsername(), mResponse.getMobile(), mPassword, firebase_id, mDeviceId);
                     Constant.intent(LoginActivity.this, NavigationActivity.class);
                     finish();
@@ -136,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this,""+ response.body().getMessgae(), Toast.LENGTH_SHORT).show();
                 }
-
             }
 
             @Override
@@ -208,7 +201,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             intent.putExtra("name", personName);
             intent.putExtra("email", email);
-          //  intent.putExtra("images", personPhotoUrl);
+            //  intent.putExtra("images", personPhotoUrl);
             startActivity(intent);
         }
     }

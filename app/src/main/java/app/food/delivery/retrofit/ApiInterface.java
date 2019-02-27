@@ -2,6 +2,7 @@ package app.food.delivery.retrofit;
 
 
 
+import app.food.delivery.model.FoodListModel;
 import app.food.delivery.model.SigninModel;
 
 import app.food.delivery.model.ForgotPasswordModel;
@@ -35,5 +36,9 @@ public interface ApiInterface {
   @FormUrlEncoded
   @POST("forgot_password")
   Call<ForgotPasswordModel> getPassword(@Field("email") String email);
+
+  @FormUrlEncoded
+  @POST("get_food")
+  Call<FoodListModel> getFoodList(@Field("page") int page);
 
 }

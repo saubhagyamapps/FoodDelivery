@@ -2,76 +2,106 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:orientation="vertical"
+    app:cardElevation="3dp"
     app:cardCornerRadius="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="5dp">
+        android:weightSum="5">
 
-        <ImageView
-            android:id="@+id/cardViewImage"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:cardCornerRadius="5dp">
+            <ImageView
+                android:id="@+id/cardViewImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/testing" />
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/testing" />
+            android:layout_weight="2"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtFoodName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sabia Sobre Comida"
-            android:textSize="30sp"
-            android:textColor="#000"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtFoodType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="5dp"
-            android:text="yahoo comida" />
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
             <TextView
-                android:id="@+id/txtFoodPrice1"
+                android:id="@+id/txtFoodName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="₹ 150"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
-                android:textSize="30sp"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="10dp"
+                android:text="Sabia Sobre Comida"
                 android:textColor="#000"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
-
             <TextView
-                android:id="@+id/txtFoodPrice2"
+                android:id="@+id/txtFoodType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="₹150"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="25dp"
-                android:textSize="20sp"/>
+                android:layout_marginTop="5dp"
+                android:paddingLeft="12dp"
+                android:text="yahoo comida"
+                android:textSize="20sp" />
+        </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_weight="2">
+            <TextView
+                android:id="@+id/txtFoodPrice1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹ 150"
+                android:paddingLeft="10dp"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnAddFood"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:text="ADD"
-                android:layout_marginLeft="35dp"
-                android:layout_marginTop="8dp"
-                android:textColor="#79bf40"
-                android:textSize="25sp" />
+        <TextView
+            android:id="@+id/txt_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30% off"
+            android:textColor="#D85830"
+            android:textSize="15sp"
+            android:paddingLeft="10dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@id/txtFoodPrice1"
+            android:textStyle="bold"
+             />
+
+        <TextView
+            android:id="@+id/btnAddFood"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/add_button"
+            android:gravity="center"
+            android:text="ADD"
+            android:textColor="#79bf40"
+            android:textSize="18sp" />
+
+        </RelativeLayout>
     </LinearLayout>
-    </LinearLayout>
+
 </android.support.v7.widget.CardView>
