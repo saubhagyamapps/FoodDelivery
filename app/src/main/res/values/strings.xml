@@ -3,6 +3,7 @@
     <string name="hint_email">User name</string>
     <string name="hint_password">Paasword</string>
     <string name="login">LogIn</string>
+    <string name="update">Update</string>
     <string name="forgot"><u>Forgot Password?</u></string>
     <string name="progress_dialog_tital">Loading</string>
     <string name="progress_dialog_msg">Please Wait.....</string>
@@ -17,6 +18,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="Submit">Submit</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

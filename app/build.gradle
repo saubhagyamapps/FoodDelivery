@@ -53,5 +53,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.github.ParkSangGwon:TedPicker:v1.0.10'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'us.belka:androidtoggleswitch:1.2.2'
 }
 apply plugin: 'com.google.gms.google-services'
