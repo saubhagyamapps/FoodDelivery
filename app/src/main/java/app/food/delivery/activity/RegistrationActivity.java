@@ -1,23 +1,18 @@
 package app.food.delivery.activity;
 
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.common.SignInButton;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import app.food.delivery.R;
 import app.food.delivery.model.RegisterModel;
-import app.food.delivery.retrofit.ApiClient;
-import app.food.delivery.retrofit.ApiInterface;
 import app.food.delivery.sessionmanager.SessionManager;
 import app.food.delivery.util.Constant;
 import retrofit2.Call;
@@ -37,6 +32,22 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         initialization();
         Clicked();
+
+    }
+
+    private void getSocialData() {
+        try {
+            Bundle extras = getIntent().getExtras();
+            mEmail = extras.getString("name");
+            mUserName = extras.getString("email");
+            reg_Username.setText(mUserName);
+            reg_Email.setText(mEmail);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private void Clicked() {
@@ -59,7 +70,7 @@ public class RegistrationActivity extends AppCompatActivity {
         reg_Mobile = findViewById(R.id.input_mobile);
         reg_Password = findViewById(R.id.input_password);
         btn_Register = findViewById(R.id.btn_register);
-
+        getSocialData();
     }
 
     private void getValue() {
@@ -99,8 +110,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if (response.body().getStatus().equals("0")) {
 
-                    sessionManager.createLoginSession(response.body().getId(), mUserName,mEmail,mMobile,mPassword,mFirebaseId,mDeviceId);
-                    Constant.intent(RegistrationActivity.this,NavigationActivity.class);
+                    sessionManager.createLoginSession(response.body().getId(), mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId);
+                    Constant.intent(RegistrationActivity.this, NavigationActivity.class);
 
                     finish();
                     Toast.makeText(RegistrationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
