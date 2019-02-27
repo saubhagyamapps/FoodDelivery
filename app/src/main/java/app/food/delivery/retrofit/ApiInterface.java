@@ -4,6 +4,10 @@ package app.food.delivery.retrofit;
 import java.util.List;
 
 import app.food.delivery.model.FoodAddModel;
+import app.food.delivery.model.FoodListModel;
+import app.food.delivery.model.SigninModel;
+
+
 import app.food.delivery.model.ForgotPasswordModel;
 import app.food.delivery.model.RegisterModel;
 import app.food.delivery.model.SigninModel;
@@ -37,6 +41,7 @@ public interface ApiInterface {
                                     @Field("device_id") String device_id);
 
 
+
     @FormUrlEncoded
     @POST("forgot_password")
     Call<ForgotPasswordModel> getPassword(@Field("email") String email);
@@ -48,4 +53,10 @@ public interface ApiInterface {
                                @Part("description") RequestBody description,
                                @Part("price") RequestBody price,
                                @Part MultipartBody.Part[] surveyImage);
+
+  @FormUrlEncoded
+  @POST("get_food")
+  Call<FoodListModel> getFoodList(@Field("page") int page);
+
+
 }

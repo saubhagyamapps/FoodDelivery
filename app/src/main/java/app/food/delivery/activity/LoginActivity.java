@@ -36,18 +36,18 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
-    private static final int RC_SIGN_IN = 007;
     EditText etUserName, etPassword;
     Button btn_Login;
     TextView txt_ForgotPwd;
+    private static final String TAG = "LoginActivity";
     SignInButton SignIn_Google;
+    private GoogleApiClient mGoogleApiClient;
+    private static final int RC_SIGN_IN = 007;
     String personName, email;
     SessionManager sessionManager;
     int Flag;
     LoginButton facebook_Login;
     String mEmail, mPassword, mDeviceId, firebase_id;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,11 +130,10 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                     Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginActivity.this,""+ response.body().getMessgae(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "" + response.body().getMessgae(), Toast.LENGTH_SHORT).show();
+
                 }
-
             }
-
             @Override
             public void onFailure(Call<SigninModel> call, Throwable t) {
                 Constant.progressBar.dismiss();
@@ -204,7 +203,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             intent.putExtra("name", personName);
             intent.putExtra("email", email);
-          //  intent.putExtra("images", personPhotoUrl);
+            //  intent.putExtra("images", personPhotoUrl);
             startActivity(intent);
         }
     }
