@@ -58,14 +58,14 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void checkAndroidVersion() {
-        openNewScreen();
-       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermission();
 
         } else {
             openNewScreen();
 
-        }*/
+        }
 
     }
 
