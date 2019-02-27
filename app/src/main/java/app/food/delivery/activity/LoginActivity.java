@@ -119,15 +119,16 @@ public class LoginActivity extends AppCompatActivity {
         modelCall.enqueue(new Callback<SigninModel>() {
             @Override
             public void onResponse(Call<SigninModel> call, Response<SigninModel> response) {
-                SigninModel.ResultBean mResponse = response.body().getResult().get(0);
+
                 Constant.progressBar.dismiss();
                 if (response.body().getStatus().equals("0")) {
+                    SigninModel.ResultBean mResponse = response.body().getResult().get(0);
                     sessionManager.createLoginSession(mResponse.getId(), mEmail, mResponse.getUsername(), mResponse.getMobile(), mPassword, firebase_id, mDeviceId);
                     Constant.intent(LoginActivity.this, NavigationActivity.class);
                     finish();
                     Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,""+ response.body().getMessgae(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -197,11 +198,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 
-            /*Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             intent.putExtra("name", personName);
             intent.putExtra("email", email);
-            intent.putExtra("images", personPhotoUrl);
-            startActivity(intent);*/
+          //  intent.putExtra("images", personPhotoUrl);
+            startActivity(intent);
         }
     }
 
