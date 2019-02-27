@@ -30,8 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.gun0912.tedpicker.ImagePickerActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
