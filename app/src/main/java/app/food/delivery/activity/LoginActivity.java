@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     private void btnsubmit() {
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     private void validation() {
         if (mEmail.equals("")) {
             etUserName.setError("Required");
@@ -112,25 +112,23 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
     private void getLoginCall() {
         Constant.progressDialog(LoginActivity.this);
         Call<SigninModel> modelCall = Constant.apiService.getLoginData(mEmail, mPassword, firebase_id, mDeviceId);
         modelCall.enqueue(new Callback<SigninModel>() {
             @Override
             public void onResponse(Call<SigninModel> call, Response<SigninModel> response) {
-                SigninModel.ResultBean mResponse=response.body().getResult().get(0);
+                SigninModel.ResultBean mResponse = response.body().getResult().get(0);
                 Constant.progressBar.dismiss();
                 if (response.body().getStatus().equals("0")) {
-                    sessionManager.createLoginSession(mResponse.getId(), mEmail,mResponse.getUsername(),mResponse.getMobile(),mPassword,firebase_id,mDeviceId);
-                    Constant.intent(LoginActivity.this,NavigationActivity.class);
+                    sessionManager.createLoginSession(mResponse.getId(), mEmail, mResponse.getUsername(), mResponse.getMobile(), mPassword, firebase_id, mDeviceId);
+                    Constant.intent(LoginActivity.this, NavigationActivity.class);
                     finish();
                     Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
-    }
-
-
             }
 
             @Override

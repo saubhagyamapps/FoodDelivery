@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.facebook.login.widget.LoginButton;
@@ -99,6 +100,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (response.body().getStatus().equals("0")) {
 
                     sessionManager.createLoginSession(response.body().getId(), mUserName,mEmail,mMobile,mPassword,mFirebaseId,mDeviceId);
+                    Constant.intent(RegistrationActivity.this,NavigationActivity.class);
+
+                    finish();
                     Toast.makeText(RegistrationActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                 } else {
