@@ -2,6 +2,7 @@ package app.food.delivery.retrofit;
 
 
 
+import app.food.delivery.model.DetailFoodModel;
 import app.food.delivery.model.FoodListModel;
 import app.food.delivery.model.SigninModel;
 
@@ -40,5 +41,9 @@ public interface ApiInterface {
   @FormUrlEncoded
   @POST("get_food")
   Call<FoodListModel> getFoodList(@Field("page") int page);
+
+  @FormUrlEncoded
+  @POST("get_detilfood")
+  Call<DetailFoodModel> getDetailFood(@Field("id") String id);
 
 }

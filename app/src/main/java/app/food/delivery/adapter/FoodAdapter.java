@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import app.food.delivery.interfacep.BookClick;
 import app.food.delivery.model.FoodListModel;
 
 public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    
+
     private static final int ITEM = 0;
     private static final int LOADING = 1;
     private boolean isLoadingAdded = false;
@@ -31,10 +32,10 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mContex;
     BookClick bookClick;
 
-    public FoodAdapter(Context mContex,BookClick bookClick) {
+    public FoodAdapter(Context mContex, BookClick bookClick) {
         foodlistdata = new ArrayList<>();
         this.mContex = mContex;
-        this.bookClick=bookClick;
+        this.bookClick = bookClick;
     }
 
 
@@ -55,6 +56,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
         return viewHolder;
     }
+
     @NonNull
     private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
         RecyclerView.ViewHolder viewHolder;
@@ -62,6 +64,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         viewHolder = new MovieVH(v1);
         return viewHolder;
     }
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -71,10 +74,10 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 final MovieVH movieVH = (MovieVH) viewHolder;
                 movieVH.txt_Name.setText(foodlistdata.get(i).getFood_name());
                 movieVH.txt_Desc.setText(foodlistdata.get(i).getDescription());
-                movieVH.txt_price.setText(foodlistdata.get(i).getPrice());
-                Log.e(TAG, "onBindViewHolder: "+foodlistdata.get(i).getFood_name());
+                movieVH.txt_price.setText("₹ " + foodlistdata.get(i).getPrice());
+                Log.e(TAG, "onBindViewHolder: " + foodlistdata.get(i).getFood_name());
                 String mainChapterNumber = foodlistdata.get(i).getImages().split(",", 2)[0];
-                Log.e(TAG, "onBindViewHolder: "+mainChapterNumber );
+                Log.e(TAG, "onBindViewHolder: " + mainChapterNumber);
                 Glide.with(mContex).load("http://192.168.1.200/food_deliveryapp/public/food_images/" + mainChapterNumber)
                         .thumbnail(0.5f)
                         .crossFade()
@@ -85,7 +88,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 movieVH.btn_AddFood.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                            bookClick.bookClick(foodlistdata.get(i).getId());
+                        bookClick.bookClick(foodlistdata.get(i).getId());
 
                     }
                 });
@@ -138,10 +141,11 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public FoodListModel.ResultBean getItem(int position) {
         return foodlistdata.get(position);
     }
+
     public class MovieVH extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView txt_Name,txt_price, txt_Desc;
+        TextView txt_Name, txt_price, txt_Desc;
         TextView btn_AddFood;
 
 
@@ -155,7 +159,6 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             btn_AddFood = itemView.findViewById(R.id.btnAddFood);
 
 
-
         }
     }
 
@@ -166,5 +169,3 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 }
-
-

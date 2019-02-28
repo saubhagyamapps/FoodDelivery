@@ -2,36 +2,39 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:layout_margin="5dp"
     android:orientation="vertical"
-    app:cardElevation="3dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    app:cardElevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:weightSum="5">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="3">
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                app:cardCornerRadius="5dp">
-            <ImageView
-                android:id="@+id/cardViewImage"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/testing" />
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
+                android:layout_margin="5dp"
+                app:cardCornerRadius="6dp">
 
-        <LinearLayout
+                <ImageView
+                    android:id="@+id/cardViewImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/testing" />
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -43,64 +46,84 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:paddingLeft="10dp"
+                android:singleLine="true"
                 android:text="Sabia Sobre Comida"
                 android:textColor="#000"
-                android:textSize="25sp"
+                android:textSize="22sp"
                 android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:background="#000"
+                android:layout_below="@id/txtFoodName"/>
 
             <TextView
                 android:id="@+id/txtFoodType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_below="@id/txtFoodName"
+                android:layout_marginTop="3dp"
                 android:paddingLeft="12dp"
+                android:singleLine="true"
                 android:text="yahoo comida"
-                android:textSize="20sp" />
-        </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_weight="2">
-            <TextView
-                android:id="@+id/txtFoodPrice1"
-                android:layout_width="wrap_content"
+                android:textSize="18sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:background="#000"
+                android:layout_below="@id/txtFoodType"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="₹ 150"
-                android:paddingLeft="10dp"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_below="@id/txtFoodType"
+                >
 
-        <TextView
-            android:id="@+id/txt_discount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="30% off"
-            android:textColor="#D85830"
-            android:textSize="15sp"
-            android:paddingLeft="10dp"
-            android:layout_centerInParent="true"
-            android:layout_toRightOf="@id/txtFoodPrice1"
-            android:textStyle="bold"
-             />
+                <TextView
+                    android:id="@+id/txtFoodPrice1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:paddingLeft="10dp"
+                    android:text="₹ 150"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/btnAddFood"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/add_button"
-            android:gravity="center"
-            android:text="ADD"
-            android:textColor="#79bf40"
-            android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/txt_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/txtFoodPrice1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:paddingLeft="6dp"
+                    android:text="30% off"
+                    android:textColor="#D85830"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/btnAddFood"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="3dp"
+                    android:background="@drawable/add_button"
+                    android:gravity="center"
+                    android:text="ADD"
+                    android:textColor="#79bf40"
+                    android:textSize="15sp" />
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 
