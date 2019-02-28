@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.HashMap;
 
 import app.food.delivery.R;
 import app.food.delivery.fragment.AddFoodFragment;
@@ -29,7 +32,9 @@ public class NavigationActivity extends AppCompatActivity
     DrawerLayout drawer;
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
+    TextView txt_NAME, txt_EMAIL;
     Fragment fragment = null;
+    public HashMap<String, String> user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +46,14 @@ public class NavigationActivity extends AppCompatActivity
 
     private void initialization() {
         sessionManager = new SessionManager(NavigationActivity.this);
+        user = sessionManager.getUserDetails();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        txt_NAME = findViewById(R.id.txt_NAME);
+        txt_EMAIL = findViewById(R.id.txt_EMAIL);
 
+        /*txt_NAME.setText(user.get(sessionManager.KEY_NAME));
+        txt_EMAIL.setText(user.get(sessionManager.KEY_EMAIL));*/
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
