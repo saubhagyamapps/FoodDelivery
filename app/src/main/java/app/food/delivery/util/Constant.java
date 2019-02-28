@@ -12,9 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 import app.food.delivery.R;
 import app.food.delivery.retrofit.ApiClient;
 import app.food.delivery.retrofit.ApiInterface;
+import app.food.delivery.sessionmanager.SessionManager;
 
 public class Constant {
 
@@ -26,7 +29,12 @@ public class Constant {
     public static TextView txtTitle;
     public static LinearLayout screenShortLayout;
     public static ImageView ssImagesView;
-
+    public static SessionManager session;
+    public static String mUserId;
+    public static String mUserName;
+    public static String mUserMobile;
+    public static String mUserFirebaseID;
+    public static String mUserEmail;
 
     public static ApiInterface apiService =
             ApiClient.getClient().create(ApiInterface.class);
@@ -40,6 +48,16 @@ public class Constant {
 
     }
 
+    public static void setSession(Context applicationContext) {
+        session = new SessionManager(applicationContext);
+        HashMap<String, String> user = session.getUserDetails();
+        mUserId = user.get(SessionManager.KEY_ID);
+        mUserName = user.get(SessionManager.KEY_NAME);
+        mUserMobile = user.get(SessionManager.KEY_MOBILE);
+        mUserFirebaseID = user.get(SessionManager.KEY_FIREBASE_ID);
+        mUserEmail = user.get(SessionManager.KEY_EMAIL);
+    }
+
     public static void toast(String message, Context applicationContext) {
         Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show();
     }
@@ -49,6 +67,7 @@ public class Constant {
         classOne.startActivity(intent);
 
     }
+
     public static void hideKeyboard(Activity activity, View viewToHide) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(viewToHide.getWindowToken(), 0);

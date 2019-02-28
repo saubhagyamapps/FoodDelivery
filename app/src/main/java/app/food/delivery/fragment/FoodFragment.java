@@ -56,7 +56,7 @@ public class FoodFragment extends Fragment {
                 args.putString("id", id);
                 detailFoodFragment.setArguments(args);
                 getFragmentManager().beginTransaction().addToBackStack(null)
-                        .replace(R.id.content_frame, detailFoodFragment).commit();
+                        .add(R.id.content_frame, detailFoodFragment).commit();
             }
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
@@ -154,5 +154,17 @@ public class FoodFragment extends Fragment {
         });
 
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: ");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e(TAG, "onStart: " );
     }
 }

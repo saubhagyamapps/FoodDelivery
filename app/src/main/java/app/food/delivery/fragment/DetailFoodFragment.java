@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
@@ -60,7 +59,6 @@ public class DetailFoodFragment extends Fragment {
 
 
     }
-
 
     private void getFoodDetailData() {
         Call<DetailFoodModel> detailFoodFragmentCall = Constant.apiService.getDetailFood(mFoodId);
@@ -122,7 +120,7 @@ public class DetailFoodFragment extends Fragment {
             public void run() {
                 handler.post(Update);
             }
-        }, 3000, 3000);
+        }, 2000, 2000);
 
         indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

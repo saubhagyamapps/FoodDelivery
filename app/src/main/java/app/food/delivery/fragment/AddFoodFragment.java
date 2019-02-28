@@ -39,7 +39,7 @@ public class AddFoodFragment extends Fragment {
     Button btn_Add_Image;
     private static final int INTENT_REQUEST_GET_IMAGES = 13;
     private static final String TAG = "AddFoodFragment";
-    String imgesFlag="0";
+    String imgesFlag = "0";
     private ArrayList<Uri> image_uris;
 
     @Override
@@ -54,7 +54,7 @@ public class AddFoodFragment extends Fragment {
 
 
     private void initialization() {
-
+        Constant.setSession(getActivity());
         food_Name = mView.findViewById(R.id.food_name);
         food_Desc = mView.findViewById(R.id.food_desc);
         food_Price = mView.findViewById(R.id.food_price);
@@ -144,6 +144,7 @@ public class AddFoodFragment extends Fragment {
     }
 
     public void APIcall() {
+
         Constant.progressDialog(getActivity());
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[image_uris.size()];
 
@@ -154,7 +155,7 @@ public class AddFoodFragment extends Fragment {
             surveyImagesParts[index] = MultipartBody.Part.createFormData("images[]", file.getName(), surveyBody);
         }
         RequestBody id =
-                RequestBody.create(MediaType.parse("multipart/form-data"), "15");
+                RequestBody.create(MediaType.parse("multipart/form-data"), Constant.mUserId);
         RequestBody food_name =
                 RequestBody.create(MediaType.parse("multipart/form-data"), food_Name.getText().toString().trim());
         RequestBody food_p =
@@ -168,8 +169,8 @@ public class AddFoodFragment extends Fragment {
                 Constant.progressBar.dismiss();
                 Constant.toast(response.body().getMessgae(), getActivity());
                 Log.e(TAG, "onResponse: " + response);
-                if(response.body().getStatus().equals("0")){
-                    getFragmentManager().beginTransaction().replace(R.id.content_frame,new FoodFragment()).commit();
+                if (response.body().getStatus().equals("0")) {
+                    getFragmentManager().beginTransaction().replace(R.id.content_frame, new FoodFragment()).commit();
                 }
             }
 
