@@ -56,10 +56,10 @@ public class FoodFragment extends Fragment {
                 args.putString("id", id);
                 detailFoodFragment.setArguments(args);
                 getFragmentManager().beginTransaction().addToBackStack(null)
-                        .replace(R.id.content_frame,detailFoodFragment).commit();
+                        .replace(R.id.content_frame, detailFoodFragment).commit();
             }
         });
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(foodAdapter);
         recyclerView.addOnScrollListener(new PaginationScrollListenerGridlaout((GridLayoutManager) gridLayoutManager) {
