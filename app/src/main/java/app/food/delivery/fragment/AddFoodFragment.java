@@ -168,6 +168,9 @@ public class AddFoodFragment extends Fragment {
                 Constant.progressBar.dismiss();
                 Constant.toast(response.body().getMessgae(), getActivity());
                 Log.e(TAG, "onResponse: " + response);
+                if(response.body().getStatus().equals("0")){
+                    getFragmentManager().beginTransaction().replace(R.id.content_frame,new FoodFragment()).commit();
+                }
             }
 
             @Override

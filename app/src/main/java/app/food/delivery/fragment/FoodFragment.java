@@ -30,14 +30,12 @@ public class FoodFragment extends Fragment {
     View mView;
     RecyclerView recyclerView;
     FoodAdapter foodAdapter;
-    int[] num = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     private boolean isLoading = false;
     private boolean isLastPage = false;
     private static final int PAGE_START = 1;
     private int currentPage = PAGE_START;
     private static final String TAG = "FoodFragment";
     private int TOTAL_PAGES;
-    List<FoodListModel.ResultBean> foodlistdata;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

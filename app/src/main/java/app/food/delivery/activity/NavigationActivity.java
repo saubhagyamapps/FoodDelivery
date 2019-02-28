@@ -40,6 +40,7 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     private void initialization() {
+
         sessionManager = new SessionManager(NavigationActivity.this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,6 +62,10 @@ public class NavigationActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.content_frame, new FoodFragment());
+        tx.commit();
+
     }
 
     @Override
