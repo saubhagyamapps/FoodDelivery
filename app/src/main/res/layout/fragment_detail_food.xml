@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,13 +8,14 @@
     android:orientation="vertical"
     tools:context="app.food.delivery.fragment.DetailFoodFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="10">
 
         <RelativeLayout
+            android:layout_above="@id/bottomLauout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="30dp"
@@ -44,48 +45,73 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/bottomLauout"
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txt_food_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Mexican Food"
+                android:layout_marginLeft="30dp"
                 android:textSize="25sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_food_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_food_name"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="2dp" />
 
             <TextView
                 android:id="@+id/txt_food_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txt_food_name"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Yahoo Comido"
-                android:textSize="20sp" />
+                android:layout_below="@id/txt_food_category"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="0dp" />
 
             <TextView
                 android:id="@+id/txt_food_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_food_desc"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="₹ 1500"
                 android:textColor="@color/yellow"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
+            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                android:id="@+id/btnPluseMin"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_below="@id/txt_food_desc"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                app:backGroundColor="@color/colorPrimary"
+                app:finalNumber="10"
+                app:initialNumber="1" />
+
+            <Button
+                android:id="@+id/btnAddtoCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_food_price"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"
+                android:text="Add to Cart"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+
         </RelativeLayout>
-    </LinearLayout>
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

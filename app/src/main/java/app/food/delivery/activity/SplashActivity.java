@@ -1,7 +1,6 @@
 package app.food.delivery.activity;
 
 
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
             Flag = 0;
 
         }
-       checkAndroidVersion();
+        checkAndroidVersion();
 
     }
 
@@ -85,11 +84,15 @@ public class SplashActivity extends AppCompatActivity {
     private void checkPermission() {
         if (ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) +
                 ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) +
+                ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) +
+                ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) +
                 ContextCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) ||
                     ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                    ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ||
+                    ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) ||
                     ActivityCompat.shouldShowRequestPermissionRationale(SplashActivity.this, Manifest.permission.CAMERA)) {
 
                 Snackbar.make(SplashActivity.this.findViewById(android.R.id.content),
@@ -101,6 +104,8 @@ public class SplashActivity extends AppCompatActivity {
                                 requestPermissions(
                                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                                Manifest.permission.ACCESS_COARSE_LOCATION,
                                                 Manifest.permission.CAMERA},
                                         PERMISSIONS_MULTIPLE_REQUEST);
                             }
@@ -109,6 +114,8 @@ public class SplashActivity extends AppCompatActivity {
                 requestPermissions(
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
                                 Manifest.permission.CAMERA},
                         PERMISSIONS_MULTIPLE_REQUEST);
             }
@@ -126,8 +133,9 @@ public class SplashActivity extends AppCompatActivity {
                 if (grantResults.length > 0) {
                     boolean cameraPermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     boolean readExternalFile = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean location = grantResults[2] == PackageManager.PERMISSION_GRANTED;
 
-                    if (cameraPermission && readExternalFile) {
+                    if (cameraPermission && readExternalFile && location) {
                         openNewScreen();
                     } else {
                         Snackbar.make(findViewById(android.R.id.content),
@@ -140,6 +148,8 @@ public class SplashActivity extends AppCompatActivity {
                                         requestPermissions(
                                                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                                                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                                        Manifest.permission.ACCESS_COARSE_LOCATION,
                                                         Manifest.permission.CAMERA},
                                                 PERMISSIONS_MULTIPLE_REQUEST);
                                     }

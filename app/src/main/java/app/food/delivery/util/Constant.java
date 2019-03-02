@@ -35,6 +35,7 @@ public class Constant {
     public static String mUserMobile;
     public static String mUserFirebaseID;
     public static String mUserEmail;
+    public static String mAddress;
 
     public static ApiInterface apiService =
             ApiClient.getClient().create(ApiInterface.class);

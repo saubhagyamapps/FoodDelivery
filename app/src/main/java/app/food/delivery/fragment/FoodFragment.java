@@ -41,7 +41,7 @@ public class FoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_food, container, false);
-        getActivity().setTitle("Food List");
+       // getActivity().setTitle("");
         initialization();
         return mView;
     }
@@ -50,15 +50,19 @@ public class FoodFragment extends Fragment {
         recyclerView = mView.findViewById(R.id.recyclerViewFood);
         foodAdapter = new FoodAdapter(getActivity(), new BookClick() {
             @Override
-            public void bookClick(String id) {
+            public void bookClick(String food_id) {
                 DetailFoodFragment detailFoodFragment = new DetailFoodFragment();
                 Bundle args = new Bundle();
-                args.putString("id", id);
+                args.putString("food_id", food_id);
                 detailFoodFragment.setArguments(args);
                 getFragmentManager().beginTransaction().addToBackStack(null)
                         .add(R.id.content_frame, detailFoodFragment).commit();
             }
         });
+      APICALL();
+    }
+
+    private void APICALL() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(foodAdapter);
@@ -96,7 +100,7 @@ public class FoodFragment extends Fragment {
                 return isLoading;
             }
         });
-        loadFirstPage();
+         loadFirstPage();
     }
 
     private void loadFirstPage() {

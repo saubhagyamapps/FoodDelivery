@@ -1,11 +1,15 @@
 package app.food.delivery.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +24,11 @@ import com.gun0912.tedpicker.ImagePickerActivity;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import app.food.delivery.R;
 import app.food.delivery.model.FoodAddModel;
+import app.food.delivery.model.FoodCategoryModel;
 import app.food.delivery.util.Constant;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -33,7 +39,7 @@ import retrofit2.Response;
 
 public class AddFoodFragment extends Fragment {
     View mView;
-    EditText food_Name, food_Desc, food_Price;
+    EditText food_Name, food_Desc, food_Price, food_category;
     ImageView food_Image_One, food_Image_Two, food_Image_Three;
     LinearLayout Food_Image_Layout;
     Button btn_Add_Image;
@@ -41,12 +47,18 @@ public class AddFoodFragment extends Fragment {
     private static final String TAG = "AddFoodFragment";
     String imgesFlag = "0";
     private ArrayList<Uri> image_uris;
+    List<String> categoryAdepter;
+    CharSequence colors[];
+    CardView food_category_card;
+    CharSequence[] cs;
+    String mFoodCategory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_add_food, container, false);
         getActivity().setTitle("Add Food");
+
         initialization();
         return mView;
 
@@ -56,6 +68,9 @@ public class AddFoodFragment extends Fragment {
     private void initialization() {
         Constant.setSession(getActivity());
         food_Name = mView.findViewById(R.id.food_name);
+        food_category_card = mView.findViewById(R.id.food_category_card);
+        food_category = mView.findViewById(R.id.food_category);
+        food_category.setInputType(InputType.TYPE_NULL);
         food_Desc = mView.findViewById(R.id.food_desc);
         food_Price = mView.findViewById(R.id.food_price);
         food_Image_One = mView.findViewById(R.id.food_image_one);
@@ -71,6 +86,38 @@ public class AddFoodFragment extends Fragment {
             }
         });
         submitButtonClick();
+
+        categoryAPICALL();
+    }
+
+
+    private void categoryAPICALL() {
+        Call<FoodCategoryModel> categoryModelCall = Constant.apiService.getFoodCategory();
+        categoryModelCall.enqueue(new Callback<FoodCategoryModel>() {
+            @Override
+            public void onResponse(Call<FoodCategoryModel> call, Response<FoodCategoryModel> response) {
+                Log.e(TAG, "onResponse: " + response.body().getResult());
+                List<FoodCategoryModel.ResultBean> databean = response.body().getResult();
+
+                categoryAdepter = new ArrayList<>();
+                for (int i = 0; i < databean.size(); i++) {
+                    categoryAdepter.add(i, databean.get(i).getCategory_name());
+                }
+                cs = categoryAdepter.toArray(new CharSequence[categoryAdepter.size()]);
+                food_category.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CreateAlertDialog(cs);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailure(Call<FoodCategoryModel> call, Throwable t) {
+
+            }
+        });
     }
 
     private void submitButtonClick() {
@@ -79,6 +126,8 @@ public class AddFoodFragment extends Fragment {
             public void onClick(View v) {
                 if (food_Name.getText().toString().trim().equals("")) {
                     food_Name.setError("Required");
+                } else if (food_category.getText().toString().trim().equals("")) {
+                    food_category.setError("Required");
                 } else if (food_Desc.getText().toString().trim().equals("")) {
                     food_Desc.setError("Required");
                 } else if (food_Price.getText().toString().trim().equals("")) {
@@ -160,9 +209,11 @@ public class AddFoodFragment extends Fragment {
                 RequestBody.create(MediaType.parse("multipart/form-data"), food_Name.getText().toString().trim());
         RequestBody food_p =
                 RequestBody.create(MediaType.parse("multipart/form-data"), food_Price.getText().toString().trim());
+        RequestBody food_category =
+                RequestBody.create(MediaType.parse("multipart/form-data"), mFoodCategory);
         RequestBody food_dec =
                 RequestBody.create(MediaType.parse("multipart/form-data"), food_Desc.getText().toString().trim());
-        Call<FoodAddModel> addModelCall = Constant.apiService.addFood(id, food_name, food_dec, food_p, surveyImagesParts);
+        Call<FoodAddModel> addModelCall = Constant.apiService.addFood(id, food_name, food_dec, food_p, food_category, surveyImagesParts);
         addModelCall.enqueue(new Callback<FoodAddModel>() {
             @Override
             public void onResponse(Call<FoodAddModel> call, Response<FoodAddModel> response) {
@@ -180,5 +231,21 @@ public class AddFoodFragment extends Fragment {
                 Log.e(TAG, "onFailure: ");
             }
         });
+    }
+
+    public void CreateAlertDialog(CharSequence[] cs) {
+
+
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(getActivity());
+
+        alertbox.setTitle("Pick one item")
+                .setItems(cs, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int pos) {
+                        mFoodCategory = String.valueOf(pos);
+                        Log.e(TAG, "onClick: " + pos);
+                        food_category.setText(categoryAdepter.get(pos));
+                    }
+                });
+        alertbox.show();
     }
 }

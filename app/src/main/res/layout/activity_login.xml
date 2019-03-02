@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <RelativeLayout
@@ -13,35 +13,35 @@
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:src="@drawable/logo"
-            android:layout_marginTop="70dp"/>
+            android:layout_marginTop="20dp"
+            android:src="@drawable/logo" />
+
         <LinearLayout
             android:id="@+id/loginForm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_below="@id/logo"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="5dp"
                 app:cardElevation="3dp">
 
                 <EditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/edittext_underline"
+                    android:background="@null"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
-                    android:textColor="@color/Black"
-                    android:textColorHint="@color/Black" />
+                    android:textColor="@color/Black" />
 
             </android.support.v7.widget.CardView>
 
@@ -50,21 +50,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardCornerRadius="5dp"
                 app:cardElevation="3dp">
 
                 <EditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/edittext_underline"
+                    android:background="@null"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:paddingLeft="10dp"
                     android:paddingBottom="5dp"
                     android:singleLine="true"
-                    android:textColor="@color/Black"
-                    android:textColorHint="@color/Black" />
+                    android:textColor="@color/Black" />
 
             </android.support.v7.widget.CardView>
 

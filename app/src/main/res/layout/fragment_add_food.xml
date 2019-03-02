@@ -37,10 +37,36 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/food_category_card"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/food_name_card"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp">
+
+            <EditText
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:onClick="submitQuantityButton"
+                android:inputType="none"
+                android:id="@+id/food_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Food Category"
+                android:padding="12dp"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textSize="20sp" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:id="@+id/food_desc_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/food_name_card"
+            android:layout_below="@id/food_category_card"
             android:layout_marginTop="20dp">
 
             <EditText

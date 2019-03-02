@@ -1,29 +1,26 @@
 package app.food.delivery.retrofit;
 
 
-import java.util.List;
-
-import app.food.delivery.model.FoodAddModel;
-
+import app.food.delivery.model.AddToCartModel;
+import app.food.delivery.model.CartViewModel;
 import app.food.delivery.model.DetailFoodModel;
-
+import app.food.delivery.model.FoodAddModel;
+import app.food.delivery.model.FoodCategoryModel;
 import app.food.delivery.model.FoodListModel;
-import app.food.delivery.model.SigninModel;
-
-
 import app.food.delivery.model.ForgotPasswordModel;
 import app.food.delivery.model.RegisterModel;
+import app.food.delivery.model.RemoveCartModel;
+import app.food.delivery.model.ResetPasswordModel;
 import app.food.delivery.model.SigninModel;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 
 public interface ApiInterface {
 
@@ -44,7 +41,6 @@ public interface ApiInterface {
                                     @Field("device_id") String device_id);
 
 
-
     @FormUrlEncoded
     @POST("forgot_password")
     Call<ForgotPasswordModel> getPassword(@Field("email") String email);
@@ -55,16 +51,40 @@ public interface ApiInterface {
                                @Part("foodname") RequestBody foodname,
                                @Part("description") RequestBody description,
                                @Part("price") RequestBody price,
+                               @Part("foodcategory_id") RequestBody foodcategory_id,
                                @Part MultipartBody.Part[] surveyImage);
 
-  @FormUrlEncoded
-  @POST("get_food")
-  Call<FoodListModel> getFoodList(@Field("page") int page);
+    @FormUrlEncoded
+    @POST("get_food")
+    Call<FoodListModel> getFoodList(@Field("page") int page);
 
 
-  @FormUrlEncoded
-  @POST("get_detilfood")
-  Call<DetailFoodModel> getDetailFood(@Field("id") String id);
+    @FormUrlEncoded
+    @POST("get_detilfood")
+    Call<DetailFoodModel> getDetailFood(@Field("id") String id);
 
+    @GET("foodcategory")
+    Call<FoodCategoryModel> getFoodCategory();
+
+    @FormUrlEncoded
+    @POST("reset_password")
+    Call<ResetPasswordModel> getResetPassword(@Field("id") String id,
+                                              @Field("oldpass") String old_password,
+                                              @Field("newpass") String new_password);
+
+    @FormUrlEncoded
+    @POST("add_to_cart")
+    Call<AddToCartModel> addtoCartItem(@Field("user_id") String user_id,
+                                       @Field("food_id") String food_id,
+                                       @Field("quantity") String quantity,
+                                       @Field("price") int price);
+
+    @FormUrlEncoded
+    @POST("remove_cart")
+    Call<RemoveCartModel> removeCart(@Field("user_id") String user_id,
+                                     @Field("food_id") String food_id);
+    @FormUrlEncoded
+    @POST("view_cart")
+    Call<CartViewModel> cartViewData(@Field("user_id") String user_id);
 
 }

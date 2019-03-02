@@ -3,6 +3,7 @@ package app.food.delivery.adapter;
 import android.content.Context;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,10 +86,10 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(movieVH.imageView);
 
-                movieVH.btn_AddFood.setOnClickListener(new View.OnClickListener() {
+                movieVH.cardViewFood.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        bookClick.bookClick(foodlistdata.get(i).getId());
+                        bookClick.bookClick(String.valueOf(foodlistdata.get(i).getFood_id()));
 
                     }
                 });
@@ -147,6 +148,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ImageView imageView;
         TextView txt_Name, txt_price, txt_Desc;
         TextView btn_AddFood;
+        CardView cardViewFood;
 
 
         public MovieVH(@NonNull View itemView) {
@@ -157,6 +159,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             txt_price = itemView.findViewById(R.id.txtFoodPrice1);
             txt_Desc = itemView.findViewById(R.id.txtFoodType);
             btn_AddFood = itemView.findViewById(R.id.btnAddFood);
+            cardViewFood = itemView.findViewById(R.id.cardViewFood);
 
 
         }
