@@ -74,7 +74,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             case ITEM:
                 final MovieVH movieVH = (MovieVH) viewHolder;
                 movieVH.txt_Name.setText(foodlistdata.get(i).getFood_name());
-                movieVH.txt_Desc.setText(foodlistdata.get(i).getDescription());
+                movieVH.txt_Desc.setText(foodlistdata.get(i).getCategory_name());
                 movieVH.txt_price.setText("₹ " + foodlistdata.get(i).getPrice());
                 Log.e(TAG, "onBindViewHolder: " + foodlistdata.get(i).getFood_name());
                 String mainChapterNumber = foodlistdata.get(i).getImages().split(",", 2)[0];
@@ -89,7 +89,7 @@ public class FoodAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 movieVH.cardViewFood.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        bookClick.bookClick(String.valueOf(foodlistdata.get(i).getFood_id()));
+                        bookClick.bookClick(String.valueOf(foodlistdata.get(i).getFood_id()),foodlistdata.get(i).getPrice());
 
                     }
                 });

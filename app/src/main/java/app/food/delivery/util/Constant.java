@@ -36,6 +36,10 @@ public class Constant {
     public static String mUserFirebaseID;
     public static String mUserEmail;
     public static String mAddress;
+    public static String mImages;
+    public static String mGender;
+    public static String mPassword;
+    public static String mDeviceId;
 
     public static ApiInterface apiService =
             ApiClient.getClient().create(ApiInterface.class);
@@ -57,6 +61,11 @@ public class Constant {
         mUserMobile = user.get(SessionManager.KEY_MOBILE);
         mUserFirebaseID = user.get(SessionManager.KEY_FIREBASE_ID);
         mUserEmail = user.get(SessionManager.KEY_EMAIL);
+        mAddress = user.get(SessionManager.KEY_ADDRESS);
+        mImages = user.get(SessionManager.KEY_IMAGES);
+        mGender = user.get(SessionManager.KEY_GENDER);
+        mPassword = user.get(SessionManager.KEY_PASSWORD);
+        mDeviceId = user.get(SessionManager.KEY_DEVICE_ID);
     }
 
     public static void toast(String message, Context applicationContext) {

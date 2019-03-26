@@ -24,6 +24,9 @@ public class SessionManager {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_DEVICE_ID = "device_id";
     public static final String KEY_FIREBASE_ID = "firebse_id";
+    public static final String KEY_ADDRESS = "Address";
+    public static final String KEY_IMAGES = "images";
+    public static final String KEY_GENDER = "gender";
 
     public SessionManager(Context context) {
         this._context = context;
@@ -32,7 +35,7 @@ public class SessionManager {
     }
 
     public void createLoginSession(String id,String name, String mEmail,String mobile,
-                                   String mPassword, String device_id, String firebase_id) {
+                                   String mPassword, String device_id, String firebase_id,String address,String image,String gender) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_ID, id);
         editor.putString(KEY_NAME, name);
@@ -41,6 +44,9 @@ public class SessionManager {
         editor.putString(KEY_PASSWORD, mPassword);
         editor.putString(KEY_DEVICE_ID, device_id);
         editor.putString(KEY_FIREBASE_ID, firebase_id);
+        editor.putString(KEY_ADDRESS, address);
+        editor.putString(KEY_IMAGES, image);
+        editor.putString(KEY_GENDER, gender);
         editor.apply();
     }
 
@@ -61,6 +67,9 @@ public class SessionManager {
         user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
         user.put(KEY_DEVICE_ID, pref.getString(KEY_DEVICE_ID, null));
         user.put(KEY_FIREBASE_ID, pref.getString(KEY_FIREBASE_ID, null));
+        user.put(KEY_ADDRESS, pref.getString(KEY_ADDRESS, null));
+        user.put(KEY_IMAGES, pref.getString(KEY_IMAGES, null));
+        user.put(KEY_GENDER, pref.getString(KEY_GENDER, null));
 
         return user;
     }

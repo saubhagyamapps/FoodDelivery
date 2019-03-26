@@ -9,7 +9,7 @@ public class DetailFoodModel {
      * status : 0
      * message : Food Avalible
      * path : http://192.168.1.200/food_deliveryapp/public/food_images/
-     * result : [{"id":23,"registermanagement_id":5,"food_name":"hadh","description":"lafhnasjnc","price":"23","images":"0227201915512680551.jpg,0227201915512680552.jpg,0227201915512680553.jpg"}]
+     * result : [{"food_id":45,"registermanagement_id":21,"food_name":"Bhel","description":"tasty","price":"120","quantity":1,"images":"0301201915514270411.jpg,0301201915514270412.jpg,0301201915514270413.jpeg","category_name":"italian"}]
      */
 
     private String status;
@@ -51,36 +51,24 @@ public class DetailFoodModel {
 
     public static class ResultBean {
         /**
-         * id : 23
-         * registermanagement_id : 5
-         * food_name : hadh
-         * description : lafhnasjnc
-         * price : 23
-         * images : 0227201915512680551.jpg,0227201915512680552.jpg,0227201915512680553.jpg
+         * food_id : 45
+         * registermanagement_id : 21
+         * food_name : Bhel
+         * description : tasty
+         * price : 120
+         * quantity : 1
+         * images : 0301201915514270411.jpg,0301201915514270412.jpg,0301201915514270413.jpeg
+         * category_name : italian
          */
 
-        private int id;
-        private int registermanagement_id;
+
         private String food_name;
         private String description;
         private String price;
+        private int quantity;
         private String images;
+        private String category_name;
 
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public int getRegistermanagement_id() {
-            return registermanagement_id;
-        }
-
-        public void setRegistermanagement_id(int registermanagement_id) {
-            this.registermanagement_id = registermanagement_id;
-        }
 
         public String getFood_name() {
             return food_name;
@@ -106,12 +94,28 @@ public class DetailFoodModel {
             this.price = price;
         }
 
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
         public String getImages() {
             return images;
         }
 
         public void setImages(String images) {
             this.images = images;
+        }
+
+        public String getCategory_name() {
+            return category_name;
+        }
+
+        public void setCategory_name(String category_name) {
+            this.category_name = category_name;
         }
     }
 }

@@ -13,6 +13,16 @@ public class SigninModel {
 
     private String status;
     private String messgae;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    private String path;
     private List<ResultBean> result;
 
     public String getStatus() {
@@ -54,6 +64,35 @@ public class SigninModel {
         private String firebase_id;
         private String device_id;
         private String id;
+        private String image;
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        private String gender;
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        private String address;
 
         public String getId() {
             return id;

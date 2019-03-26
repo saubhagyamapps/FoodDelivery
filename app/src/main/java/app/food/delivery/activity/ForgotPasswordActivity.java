@@ -28,6 +28,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         Clicked();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //overridePendingTransition(R.anim.swipe_left_enter, R.anim.swipe_left_exit);
+
+    }
 
     private void Clicked()
     {

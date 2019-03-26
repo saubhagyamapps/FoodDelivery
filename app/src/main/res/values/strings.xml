@@ -18,8 +18,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_navigation">NavigationActivity</string>
-
+    <string name="action_search">Search</string>
+    <string name="search_hint">Food name…</string>
     <string name="Submit">Submit</string>
+    <string name="thankyou">Thank you for<br>your order!</br> </string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -29,4 +31,7 @@
     <string name="product">PRODUCT</string>
     <string name="itemcount">ITEM</string>
     <string name="checkout">Checkout</string>
+    <string name="paymentmethod">Payment Method</string>
+    <string name="payment">Payment</string>
+    <string name="order">Conform Order!</string>
 </resources>

@@ -2,104 +2,86 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/accountviewsnack"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
+                android:id="@+id/imagesView"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
-                android:background="@color/colorPrimaryDark" />
+                android:layout_height="180dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/acc_profile_image"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:src="@drawable/profile_food"
-                app:civ_border_color="#ffff"
-                app:civ_border_width="1.5dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:background="@color/colorPrimaryDark" />
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/prof_camera_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="115dp"
-                android:src="@drawable/ic_camera" />
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/acc_profile_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/testing"
+                    app:civ_border_color="#ffff"
+                    app:civ_border_width="1.5dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/prof_camera_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/acc_profile_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-10dp"
+                    android:src="@drawable/ic_camera" />
+
+            </RelativeLayout>
+
         </RelativeLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
                 app:cardCornerRadius="3dp">
 
-                <LinearLayout
+
+                <EditText
+                    android:id="@+id/edt_profusername"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:layout_gravity="center"
+                    android:background="#FFFF"
+                    android:hint="User Name"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:textSize="15sp"
+                    android:paddingRight="15dp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <EditText
-                            android:id="@+id/edt_profusername"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:background="#FFFF"
-                            android:hint="User Name"
-                            android:inputType="text"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="15dp"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="4"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/username_edit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:src="@drawable/edit" />
-                    </LinearLayout>
-                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 app:cardCornerRadius="3dp">
 
                 <EditText
@@ -108,7 +90,8 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="#FFFF"
-                    android:editable="false"
+                    android:clickable="false"
+                    android:enabled="false"
                     android:hint="Email address"
                     android:inputType="textEmailAddress"
                     android:paddingLeft="10dp"
@@ -119,103 +102,60 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 app:cardCornerRadius="3dp">
 
-                <LinearLayout
+
+                <EditText
+                    android:id="@+id/edt_profmobileno"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <EditText
-                            android:id="@+id/edt_profmobileno"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:background="#FFFF"
-                            android:hint="Mobile Number"
-                            android:inputType="number"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="15dp"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="4"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/mobileno_edit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:src="@drawable/edit" />
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_gravity="center"
+                    android:background="#FFFF"
+                    android:enabled="false"
+                    android:hint="Mobile Number"
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="15dp"
+                    android:textSize="15sp" />
             </android.support.v7.widget.CardView>
+
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
                 app:cardCornerRadius="3dp">
 
-                <LinearLayout
+
+                <EditText
+                    android:id="@+id/edt_profaddress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="5">
+                    android:layout_gravity="center"
+                    android:background="#FFFF"
+                    android:hint="Address"
+                    android:inputType="text"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="15dp"
+                    android:textSize="15sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <EditText
-                            android:id="@+id/edt_profaddress"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:background="#FFFF"
-                            android:hint="Address"
-                            android:inputType="number"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="15dp"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="20dp"
-                        android:layout_weight="4"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/address_edit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:src="@drawable/edit" />
-                    </LinearLayout>
-                </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/txt_profGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -225,23 +165,26 @@
                 <belka.us.androidtoggleswitch.widgets.ToggleSwitch
                     android:id="@+id/gender_switch"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="50dp"
                     custom:activeBgColor="@color/colorPrimary"
-                    custom:inactiveBgColor="#FFF"
+                    custom:inactiveBgColor="#ffff"
                     custom:separatorColor="@color/black"
                     custom:textToggleLeft="Male"
                     custom:textToggleRight="Female"
-                    custom:toggleWidth="100dp" />
+                    custom:toggleWidth="100dp">
+
+                </belka.us.androidtoggleswitch.widgets.ToggleSwitch>
             </LinearLayout>
+
 
             <Button
                 android:id="@+id/btn_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/boader_button"
+                android:background="@color/colorPrimary"
                 android:text="@string/update"
                 android:textColor="@color/white" />
 

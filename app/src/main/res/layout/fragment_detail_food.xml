@@ -15,9 +15,9 @@
         android:weightSum="10">
 
         <RelativeLayout
-            android:layout_above="@id/bottomLauout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/bottomLauout"
             android:layout_margin="30dp"
             android:layout_weight="4"
             android:orientation="horizontal">
@@ -46,9 +46,9 @@
 
         <RelativeLayout
             android:id="@+id/bottomLauout"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
             <TextView

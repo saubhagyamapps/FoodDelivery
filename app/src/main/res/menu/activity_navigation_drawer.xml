@@ -17,17 +17,21 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Food List" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_account"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Account" />
+        <item
+            android:id="@+id/nav_received_order"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Received Order" />
     </group>
 
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_resetPassword"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="ResetPassword" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

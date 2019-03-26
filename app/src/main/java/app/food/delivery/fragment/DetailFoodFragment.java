@@ -3,6 +3,7 @@ package app.food.delivery.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -35,7 +37,7 @@ public class DetailFoodFragment extends Fragment {
     View mView;
     ViewPager viewPager;
     TextView txt_FoodName, txt_Food_Desc, txt_Food_Price;
-    String mFoodId;
+    String mFoodId, mPrice;
     CirclePageIndicator indicator;
     private int currentPage = 0;
     private int NUM_PAGES = 0;
@@ -50,10 +52,11 @@ public class DetailFoodFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_detail_food, container, false);
-        getActivity().setTitle("Detail Foods");
-        initialization();
         Bundle args = getArguments();
         mFoodId = args.getString("food_id");
+        mPrice = args.getString("price");
+        getActivity().setTitle("Detail Foods");
+        initialization();
         getFoodDetailData();
         return mView;
     }
@@ -86,15 +89,22 @@ public class DetailFoodFragment extends Fragment {
             @Override
             public void onResponse(Call<AddToCartModel> call, Response<AddToCartModel> response) {
                 if (response.body().getStatus().equals("0")) {
+                    Log.e(TAG, "onResponse: "+response.body().getTotal() );
                     Constant.toast(response.body().getMessage(), getActivity());
-                    getFragmentManager().beginTransaction().add(R.id.content_frame, new CartViewFragment()).addToBackStack("fragment").commit();
-
+                    CartViewFragment cartViewFragment = new CartViewFragment();
+                    Bundle args = new Bundle();
+                    args.putString("price", mPrice);
+                    args.putString("totalPrice", response.body().getTotal());
+                    cartViewFragment.setArguments(args);
+                    getFragmentManager().beginTransaction().addToBackStack(null).hide(DetailFoodFragment.this)
+                            .add(R.id.content_frame, cartViewFragment).commit();
                 }
             }
 
             @Override
             public void onFailure(Call<AddToCartModel> call, Throwable t) {
-
+                Log.e(TAG, "onFailure: " + t.getMessage());
+                Toast.makeText(getActivity(), "API not Working", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -104,7 +114,7 @@ public class DetailFoodFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mPluseMinValue = btnPluseMin.getNumber();
-                total = peice * Integer.parseInt(mPluseMinValue);
+                total = Integer.parseInt(mPrice) * Integer.parseInt(mPluseMinValue);
                 txt_Food_Price.setText("₹ " + String.valueOf(total));
                 Log.e(TAG, "item Count: " + mPluseMinValue);
             }
@@ -113,7 +123,7 @@ public class DetailFoodFragment extends Fragment {
 
     private void getFoodDetailData() {
         Constant.progressDialog(getActivity());
-        Call<DetailFoodModel> detailFoodFragmentCall = Constant.apiService.getDetailFood(mFoodId);
+        Call<DetailFoodModel> detailFoodFragmentCall = Constant.apiService.getDetailFood(mFoodId, Constant.mUserId);
         detailFoodFragmentCall.enqueue(new Callback<DetailFoodModel>() {
             @Override
             public void onResponse(Call<DetailFoodModel> call, Response<DetailFoodModel> response) {
@@ -142,6 +152,8 @@ public class DetailFoodFragment extends Fragment {
                     txt_Food_Price.setText("₹ " + resultBeans.get(0).getPrice());
                     total = Integer.parseInt(resultBeans.get(0).getPrice());
                     peice = Integer.parseInt(resultBeans.get(0).getPrice());
+                    btnPluseMin.setNumber(String.valueOf(resultBeans.get(0).getQuantity()));
+                    mPluseMinValue=String.valueOf(resultBeans.get(0).getQuantity());
                     handlerCall(imageList.size());
                     Constant.progressBar.dismiss();
                 }
@@ -195,5 +207,12 @@ public class DetailFoodFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate: ");
+
     }
 }

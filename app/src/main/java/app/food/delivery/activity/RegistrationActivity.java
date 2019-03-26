@@ -29,22 +29,41 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //overridePendingTransition(R.anim.swipe_left_enter, R.anim.swipe_left_exit);
+
         setContentView(R.layout.activity_registration);
         initialization();
-        Clicked();
 
+    }
+
+    private void initialization() {
+        mDeviceId = Settings.Secure.getString(RegistrationActivity.this.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        sessionManager = new SessionManager(getApplicationContext());
+        mFirebaseId = FirebaseInstanceId.getInstance().getToken();
+        reg_Username = findViewById(R.id.input_username);
+        reg_Email = findViewById(R.id.input_email);
+        reg_Mobile = findViewById(R.id.input_mobile);
+        reg_Password = findViewById(R.id.input_password);
+        btn_Register = findViewById(R.id.btn_register);
+        Clicked();
+        getSocialData();
     }
 
     private void getSocialData() {
         try {
             Bundle extras = getIntent().getExtras();
-            mEmail = extras.getString("name");
-            mUserName = extras.getString("email");
+            mEmail = extras.getString("email");
+            mUserName = extras.getString("name");
             reg_Username.setText(mUserName);
             reg_Email.setText(mEmail);
-
+            reg_Email.setEnabled(false);
+            if (extras.getString("name") == null && extras.getString("name").isEmpty() && extras.getString("name").equals("null")) {
+                reg_Email.setEnabled(true);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            reg_Email.setEnabled(true);
         }
 
 
@@ -60,18 +79,6 @@ public class RegistrationActivity extends AppCompatActivity {
         });
     }
 
-    private void initialization() {
-        mDeviceId = Settings.Secure.getString(RegistrationActivity.this.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        sessionManager = new SessionManager(getApplicationContext());
-        mFirebaseId = FirebaseInstanceId.getInstance().getToken();
-        reg_Username = findViewById(R.id.input_username);
-        reg_Email = findViewById(R.id.input_email);
-        reg_Mobile = findViewById(R.id.input_mobile);
-        reg_Password = findViewById(R.id.input_password);
-        btn_Register = findViewById(R.id.btn_register);
-        getSocialData();
-    }
 
     private void getValue() {
         mUserName = reg_Username.getText().toString().trim();
@@ -100,6 +107,13 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        //overridePendingTransition(R.anim.swipe_left_exit, R.anim.swipe_left_enter);
+
+        super.onBackPressed();
+    }
+
     private void Registration() {
         Constant.progressDialog(RegistrationActivity.this);
         Call<RegisterModel> registerModelCall = Constant.apiService.getRegister(mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId);
@@ -110,7 +124,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 if (response.body().getStatus().equals("0")) {
 
-                    sessionManager.createLoginSession(response.body().getId(), mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId);
+                    sessionManager.createLoginSession(response.body().getId(), mUserName, mEmail, mMobile, mPassword, mFirebaseId, mDeviceId, "", "", "");
+                    //overridePendingTransition(R.anim.swipe_left_exit, R.anim.swipe_left_enter);
                     Constant.intent(RegistrationActivity.this, NavigationActivity.class);
 
                     finish();

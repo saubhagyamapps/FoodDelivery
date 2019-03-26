@@ -25,9 +25,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -41,7 +44,11 @@ import java.util.Locale;
 
 import app.food.delivery.R;
 import app.food.delivery.fragment.AddFoodFragment;
+import app.food.delivery.fragment.DetailFoodFragment;
 import app.food.delivery.fragment.FoodFragment;
+import app.food.delivery.fragment.ProfileFragment;
+import app.food.delivery.fragment.RecivedOrderListFragment;
+import app.food.delivery.fragment.ResetPasswordFragment;
 import app.food.delivery.sessionmanager.SessionManager;
 import app.food.delivery.util.Constant;
 
@@ -57,6 +64,7 @@ public class NavigationActivity extends AppCompatActivity
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     TextView txt_NAME, txt_EMAIL;
+    ImageView imgUser;
     Fragment fragment = null;
     public HashMap<String, String> user;
     private static final String TAG = "NavigationActivity";
@@ -65,13 +73,17 @@ public class NavigationActivity extends AppCompatActivity
     private LocationRequest mLocationRequest;
     private double currentLatitude;
     private double currentLongitude;
+    String mFoodId, mFoodPrice;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_navigation);
+        Constant.setSession(NavigationActivity.this);
         initialization();
+
 
     }
 
@@ -80,6 +92,7 @@ public class NavigationActivity extends AppCompatActivity
         sessionManager = new SessionManager(NavigationActivity.this);
         user = sessionManager.getUserDetails();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         txt_NAME = findViewById(R.id.txt_NAME);
         txt_EMAIL = findViewById(R.id.txt_EMAIL);
@@ -103,17 +116,59 @@ public class NavigationActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.content_frame, new FoodFragment());
-        tx.commit();
+        setnavigationHeader();
+        try {
+            Bundle extras = getIntent().getExtras();
+            mFoodId = extras.getString("Food_id");
+            mFoodPrice = extras.getString("Food_price");
+            Log.e(TAG, "onResume: "+mFoodId );
+            Log.e(TAG, "onResume: "+mFoodPrice );
+            openFragment();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void setnavigationHeader() {
+        View header = navigationView.getHeaderView(0);
+        txt_NAME = (TextView) header.findViewById(R.id.txt_NAME);
+        txt_EMAIL = (TextView) header.findViewById(R.id.txt_EMAIL);
+        imgUser = header.findViewById(R.id.imageView);
+        txt_NAME.setText(Constant.mUserName);
+        txt_EMAIL.setText(Constant.mUserEmail);
+        if (Constant.mGender != null && !Constant.mGender.isEmpty() && !Constant.mGender.equals("null")) {
+            Glide.with(getApplicationContext()).load(Constant.mImages)
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imgUser);
+        }
+        Log.e(TAG, "setnavigationHeader: " + Constant.mGender);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //Now lets connect to the API
+
+        //overridePendingTransition(R.anim.swipe_left_enter, R.anim.swipe_left_exit);
         mGoogleApiClient.connect();
+    }
+
+    private void openFragment() {
+        if (mFoodId != null && !mFoodId.isEmpty() && !mFoodId.equals("null")) {
+            DetailFoodFragment detailFoodFragment = new DetailFoodFragment();
+            Bundle args = new Bundle();
+            args.putString("food_id", mFoodId);
+            args.putString("price", mFoodPrice);
+            Log.e(TAG, "--Price----->"+mFoodPrice+"-id---->"+mFoodId );
+            detailFoodFragment.setArguments(args);
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.content_frame, detailFoodFragment, "FoodFragment").commit();
+        } else {
+            FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+            tx.replace(R.id.content_frame, new FoodFragment());
+            tx.commit();
+        }
     }
 
     @Override
@@ -158,8 +213,9 @@ public class NavigationActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+
         return true;
     }
 
@@ -168,10 +224,14 @@ public class NavigationActivity extends AppCompatActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+        Log.e(TAG, "onOptionsItemSelected: ");
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
+            Log.e(TAG, "onOptionsItemSelected: ffdsafsa");
+            //overridePendingTransition(R.anim.swipe_left_exit, R.anim.swipe_left_enter);
+            Constant.intent(NavigationActivity.this, SearchActivity.class);
             return true;
         }
 
@@ -185,19 +245,21 @@ public class NavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Constant.intent(NavigationActivity.this,SearchLocationActivity.class);
+            Constant.intent(NavigationActivity.this, SearchLocationActivity.class);
         } else if (id == R.id.nav_add_food) {
             fragment = new AddFoodFragment();
 
         } else if (id == R.id.nav_foodlist) {
             fragment = new FoodFragment();
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.nav_account) {
+            fragment = new ProfileFragment();
+        } else if (id == R.id.nav_resetPassword) {
+            fragment = new ResetPasswordFragment();
         } else if (id == R.id.nav_send) {
             sessionManager.logoutUser();
             finish();
+        }else if (id == R.id.nav_received_order) {
+            fragment = new RecivedOrderListFragment();
         }
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -305,4 +367,5 @@ public class NavigationActivity extends AppCompatActivity
         }
 
     }
+
 }

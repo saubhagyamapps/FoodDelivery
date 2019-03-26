@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 007;
     String personName, email;
     SessionManager sessionManager;
+    String mImages;
     int Flag;
     LoginButton facebook_Login;
     String mEmail, mPassword, mDeviceId, firebase_id;
@@ -59,6 +60,12 @@ public class LoginActivity extends AppCompatActivity {
 
         initialization();
         signUp();
+    }
+
+    @Override
+    protected void onResume() {
+        ////overridePendingTransition(R.anim.swipe_left_enter, R.anim.swipe_left_exit);
+        super.onResume();
     }
 
     private void initialization() {
@@ -124,8 +131,16 @@ public class LoginActivity extends AppCompatActivity {
                 Constant.progressBar.dismiss();
                 if (response.body().getStatus().equals("0")) {
                     SigninModel.ResultBean mResponse = response.body().getResult().get(0);
+                    if (mResponse.getImage() != null && !mResponse.getImage().isEmpty() && !mResponse.getImage().equals("null")) {
+                        mImages = response.body().getPath() + "" + mResponse.getImage();
+                    } else {
+                        mImages = "null";
+                    }
 
-                    sessionManager.createLoginSession(mResponse.getId(), mEmail, mResponse.getUsername(), mResponse.getMobile(), mPassword, firebase_id, mDeviceId);
+                    sessionManager.createLoginSession(mResponse.getId(), mResponse.getUsername(), mEmail, mResponse.getMobile(),
+                            mPassword, firebase_id, mDeviceId, mResponse.getAddress(), mImages, mResponse.getGender());
+                    //overridePendingTransition(R.anim.swipe_left_exit, R.anim.swipe_left_enter);
+
                     Constant.intent(LoginActivity.this, NavigationActivity.class);
                     finish();
                     Toast.makeText(LoginActivity.this, "login success", Toast.LENGTH_SHORT).show();
@@ -134,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             }
+
             @Override
             public void onFailure(Call<SigninModel> call, Throwable t) {
                 Constant.progressBar.dismiss();
@@ -146,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.txtSignUp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //overridePendingTransition(R.anim.swipe_left_exit, R.anim.swipe_left_enter);
                 Constant.intent(LoginActivity.this, RegistrationActivity.class);
             }
         });
@@ -161,6 +178,7 @@ public class LoginActivity extends AppCompatActivity {
         txt_ForgotPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //overridePendingTransition(R.anim.swipe_left_exit, R.anim.swipe_left_enter);
                 startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
@@ -199,12 +217,14 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
+            Constant.progressBar.dismiss();
             Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
             intent.putExtra("name", personName);
             intent.putExtra("email", email);
             //  intent.putExtra("images", personPhotoUrl);
             startActivity(intent);
+        }else {
+            Constant.progressBar.dismiss();
         }
     }
 
@@ -214,6 +234,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
+            Constant.progressDialog(LoginActivity.this);
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }

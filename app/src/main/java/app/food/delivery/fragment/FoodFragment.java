@@ -2,15 +2,14 @@ package app.food.delivery.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import java.util.List;
 
@@ -36,30 +35,36 @@ public class FoodFragment extends Fragment {
     private int currentPage = PAGE_START;
     private static final String TAG = "FoodFragment";
     private int TOTAL_PAGES;
-
+    Fragment mContent;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_food, container, false);
-       // getActivity().setTitle("");
+        // getActivity().setTitle("");
         initialization();
         return mView;
+    }
+
+    public FoodFragment() {
+
     }
 
     private void initialization() {
         recyclerView = mView.findViewById(R.id.recyclerViewFood);
         foodAdapter = new FoodAdapter(getActivity(), new BookClick() {
             @Override
-            public void bookClick(String food_id) {
+            public void bookClick(String foodId, String price) {
                 DetailFoodFragment detailFoodFragment = new DetailFoodFragment();
                 Bundle args = new Bundle();
-                args.putString("food_id", food_id);
+                args.putString("food_id", foodId);
+                args.putString("price", price);
                 detailFoodFragment.setArguments(args);
-                getFragmentManager().beginTransaction().addToBackStack(null)
-                        .add(R.id.content_frame, detailFoodFragment).commit();
+                getFragmentManager().beginTransaction().addToBackStack("fragment").hide(FoodFragment.this)
+                        .add(R.id.content_frame, detailFoodFragment, "FoodFragment").commit();
+
             }
         });
-      APICALL();
+        APICALL();
     }
 
     private void APICALL() {
@@ -100,7 +105,7 @@ public class FoodFragment extends Fragment {
                 return isLoading;
             }
         });
-         loadFirstPage();
+        loadFirstPage();
     }
 
     private void loadFirstPage() {
@@ -169,6 +174,33 @@ public class FoodFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.e(TAG, "onStart: " );
+        Log.e(TAG, "onStart: ");
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate: ");
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e(TAG, "onActivityCreated: ");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e(TAG, "onPause: ");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e(TAG, "onStop: ");
+    }
+
+
 }

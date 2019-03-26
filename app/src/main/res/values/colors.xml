@@ -8,5 +8,6 @@
     <color name="Blue">#23285f</color>
     <color name="black">#000</color>
     <color name="Black">#000</color>
-
+    <color name="contact_name">#333333</color>
+    <color name="contact_number">#8c8c8c</color>
 </resources>

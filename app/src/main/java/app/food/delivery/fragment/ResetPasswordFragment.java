@@ -30,7 +30,7 @@ public class ResetPasswordFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        mView = inflater.inflate(R.layout.activity_forgot_password, container, false);
+        mView = inflater.inflate(R.layout.fragment_reset_password, container, false);
         initializtion();
         Constant.setSession(getActivity());
         return mView;
@@ -77,6 +77,7 @@ public class ResetPasswordFragment extends Fragment {
     }
 
     private void getResetPassword() {
+        Constant.progressDialog(getActivity());
         Call<ResetPasswordModel> modelCall = Constant.apiService.getResetPassword(Constant.mUserId, mOldPassword, mNewPassword);
         modelCall.enqueue(new Callback<ResetPasswordModel>() {
             @Override
@@ -89,10 +90,12 @@ public class ResetPasswordFragment extends Fragment {
                 } else {
                     Constant.toast(response.body().getMessage(), getActivity());
                 }
+                Constant.progressBar.dismiss();
             }
 
             @Override
             public void onFailure(Call<ResetPasswordModel> call, Throwable t) {
+                Constant.progressBar.dismiss();
 
             }
         });

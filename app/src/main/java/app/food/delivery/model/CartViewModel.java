@@ -55,6 +55,7 @@ public class CartViewModel {
         private String images;
         private String quantity;
         private int user_id;
+        private String total_price;
 
         public String getId() {
             return id;
@@ -62,6 +63,14 @@ public class CartViewModel {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getTotal_price() {
+            return total_price;
+        }
+
+        public void setTotal_price(String total_price) {
+            this.total_price = total_price;
         }
 
         private String id;

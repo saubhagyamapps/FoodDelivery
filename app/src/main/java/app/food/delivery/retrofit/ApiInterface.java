@@ -1,6 +1,7 @@
 package app.food.delivery.retrofit;
 
 
+import app.food.delivery.model.AddNewAddressModel;
 import app.food.delivery.model.AddToCartModel;
 import app.food.delivery.model.CartViewModel;
 import app.food.delivery.model.DetailFoodModel;
@@ -8,6 +9,8 @@ import app.food.delivery.model.FoodAddModel;
 import app.food.delivery.model.FoodCategoryModel;
 import app.food.delivery.model.FoodListModel;
 import app.food.delivery.model.ForgotPasswordModel;
+import app.food.delivery.model.OderConformModel;
+import app.food.delivery.model.ProfileModel;
 import app.food.delivery.model.RegisterModel;
 import app.food.delivery.model.RemoveCartModel;
 import app.food.delivery.model.ResetPasswordModel;
@@ -61,7 +64,8 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("get_detilfood")
-    Call<DetailFoodModel> getDetailFood(@Field("id") String id);
+    Call<DetailFoodModel> getDetailFood(@Field("id") String id,
+                                        @Field("user_id") String user_id);
 
     @GET("foodcategory")
     Call<FoodCategoryModel> getFoodCategory();
@@ -83,8 +87,34 @@ public interface ApiInterface {
     @POST("remove_cart")
     Call<RemoveCartModel> removeCart(@Field("user_id") String user_id,
                                      @Field("food_id") String food_id);
+
     @FormUrlEncoded
     @POST("view_cart")
     Call<CartViewModel> cartViewData(@Field("user_id") String user_id);
+
+    @Multipart
+    @POST("edit_profile")
+    Call<ProfileModel> EditProfileWIthImage(@Part("id") RequestBody id,
+                                            @Part("username") RequestBody username,
+                                            @Part("gender") RequestBody gender,
+                                            @Part("address") RequestBody address,
+                                            @Part MultipartBody.Part file);
+
+    @FormUrlEncoded
+    @POST("edit_profile")
+    Call<ProfileModel> getEditProfile(@Field("id") String id,
+                                      @Field("username") String username,
+                                      @Field("gender") String gender,
+                                      @Field("address") String address);
+
+    @FormUrlEncoded
+    @POST("update_address")
+    Call<AddNewAddressModel> updateAddress(@Field("user_id") String id,
+                                           @Field("address") String username);
+
+    @FormUrlEncoded
+    @POST("verification")
+    Call<OderConformModel> oderConform(@Field("food_id") String food_id,
+                                       @Field("user_id") String user_id);
 
 }

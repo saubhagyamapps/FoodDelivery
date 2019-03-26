@@ -5,8 +5,19 @@
     android:layout_height="match_parent"
     tools:context="app.food.delivery.fragment.FoodFragment">
 
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recyclerViewFood"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+ <!--   <EditText
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@drawable/ic_search"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/boader_edittext"
+        android:id="@+id/txtSearchFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>
